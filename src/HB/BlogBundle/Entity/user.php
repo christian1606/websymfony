@@ -76,6 +76,15 @@ class user
      * @ORM\Column(name="enabled", type="boolean")
      */
     private $enabled;
+    
+    
+     /**
+     * @var Article[]
+     * 
+     * @ORM\OneToMany(targetEntity="Article", mappedBy="author")
+     * articles du user
+     */
+    private $articles;
 
      /**
      * 
@@ -280,5 +289,40 @@ class user
     public function getEnabled()
     {
         return $this->enabled;
+    }
+
+    /**
+     * Add article
+     *
+     * @param \HB\BlogBundle\Entity\Article $article
+     * @return user
+     */
+    public function addArticle(\HB\BlogBundle\Entity\Article $article)
+    {
+        $article->setAuthor($this);
+        $this->articles[] = $article;     
+
+        return $this;
+    }
+
+    /**
+     * Remove article
+     *
+     * @param \HB\BlogBundle\Entity\Article $article
+     */
+    public function removeArticle(\HB\BlogBundle\Entity\Article $article)
+    {
+        $article->setAuthor(null);
+        $this->articles->removeElement($article);
+    }
+
+    /**
+     * Get articles
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getArticles()
+    {
+        return $this->articles;
     }
 }

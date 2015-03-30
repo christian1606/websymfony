@@ -10,11 +10,11 @@
                 <td>{{ entity.id }}</td>
             </tr>
             <tr>
-                <th>Title</th>
+                <th>Titre</th>
                 <td>{{ entity.title }}</td>
             </tr>
             <tr>
-                <th>Content</th>
+                <th>Contenu</th>
                 <td>{{ entity.content }}</td>
             </tr>
             <tr>
@@ -30,16 +30,22 @@
                 <td>{{ entity.publishDate|date('Y-m-d H:i:s') }}</td>
             </tr>
             <tr>
-                <th>Published</th>
+                <th>Publié</th>
                 <td>{{ entity.published }}</td>
             </tr>
             <tr>
-                <th>Enabled</th>
+                <th>Actif</th>
                 <td>{{ entity.enabled }}</td>
             </tr>
-        </tbody>
+            <tr>
+                <th>Nom de l'auteur</th>
+                <td>{{ entity.author.login }}</td>
+            </tr>
+       </tbody>
     </table>
 
+      
+      
         <ul class="record_actions">
     <li>
         <a href="{{ path('article') }}">

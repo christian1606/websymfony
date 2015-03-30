@@ -5,9 +5,23 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+ <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" />
+  <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+    </style>
+
     </head>
     <body>
+        {% block menu %}
+                {% include ":blocs:menu.html.twig" %}  
+        {% endblock %}
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
+                    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="http://code.jquery.com/jquery.js"></script>
+          <script scr="{{ asset('js/bootstrap.js') }}"></script>
     </body>
 </html>

@@ -73,7 +73,7 @@ class Article
     /**
      * @var user 
      * 
-     * @ORM\ManyToOne(targetEntity="user")
+     * @ORM\ManyToOne(targetEntity="user", inversedBy="articles")
      * user chemin simple car ds le meme namespace
      */
     private $author;
