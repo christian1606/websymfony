@@ -77,6 +77,16 @@ class user
      */
     private $enabled;
 
+     /**
+     * 
+     * 
+     * 
+     */
+    public function __construct() {
+        //valeur par defaut ds le formulaire
+        $this->creationDate = new \DateTime();
+        //$this->lastEditTime = new \DateTime();
+    }
     
     /**
      * Get id

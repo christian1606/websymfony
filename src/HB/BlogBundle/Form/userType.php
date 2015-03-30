@@ -20,8 +20,8 @@ class userType extends AbstractType
             ->add('login')
             ->add('password')
             ->add('birthDate')
-            ->add('creationDate')
-            ->add('lastEditTime')
+            //->add('creationDate')
+            //->add('lastEditTime')
             ->add('enabled')
         ;
     }

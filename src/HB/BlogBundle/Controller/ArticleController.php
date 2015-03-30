@@ -186,6 +186,9 @@ class ArticleController extends Controller
             throw $this->createNotFoundException('Unable to find Article entity.');
         }
 
+        //gérer la datetime de dernire edition = lastEditDate
+        $entity->setLastEditDate(new \DateTime());
+        
         $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);

@@ -185,6 +185,9 @@ class userController extends Controller
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find user entity.');
         }
+        
+        //gérer la datetime de dernire edition = lastEditDate
+        $entity->setLastEditDate(new \DateTime());
 
         $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createEditForm($entity);
