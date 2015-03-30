@@ -71,6 +71,14 @@ class Article
     private $enabled;
     
     /**
+     * @var user 
+     * 
+     * @ORM\ManyToOne(targetEntity="user")
+     * user chemin simple car ds le meme namespace
+     */
+    private $author;
+    
+    /**
      * Get id
      *
      * @return integer 

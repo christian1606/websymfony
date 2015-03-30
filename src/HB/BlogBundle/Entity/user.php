@@ -77,7 +77,7 @@ class user
      */
     private $enabled;
 
-
+    
     /**
      * Get id
      *
