@@ -1,8 +1,7 @@
 <?php
-
 namespace HB\BlogBundle\Entity;
-
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Article
@@ -25,6 +24,12 @@ class Article
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255)
+     * @Assert\Length(
+     *      min = "2",
+     *      max = "120",
+     *      minMessage = "Votre titre doit faire au moins {{ limit }} caractères",
+     *      maxMessage = "Votre titre ne peut pas être plus long que {{ limit }} caractères"
+     * )
      */
     private $title;
 
@@ -32,6 +37,7 @@ class Article
      * @var string
      *
      * @ORM\Column(name="content", type="text")
+     * @Assert\NotBlank()
      */
     private $content;
 
@@ -39,6 +45,7 @@ class Article
      * @var \DateTime
      *
      * @ORM\Column(name="creationDate", type="datetime")
+     * @Assert\DateTime()
      */
     private $creationDate;
 
@@ -46,6 +53,7 @@ class Article
      * @var \DateTime
      *
      * @ORM\Column(name="lastEditDate", type="datetime", nullable=true)
+     * @Assert\DateTime()
      */
     private $lastEditDate;
 
@@ -53,6 +61,7 @@ class Article
      * @var \DateTime
      *
      * @ORM\Column(name="publishDate", type="datetime")
+     * @Assert\DateTime()
      */
     private $publishDate;
 
@@ -60,6 +69,7 @@ class Article
      * @var boolean
      *
      * @ORM\Column(name="published", type="boolean")
+     * @Assert\DateTime()
      */
     private $published;
 
@@ -74,6 +84,7 @@ class Article
      * @var user 
      * 
      * @ORM\ManyToOne(targetEntity="user", inversedBy="articles")
+     * @Assert\Valid()
      * user chemin simple car ds le meme namespace
      */
     private $author;

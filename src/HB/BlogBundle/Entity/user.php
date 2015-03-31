@@ -1,8 +1,8 @@
 <?php
-
 namespace HB\BlogBundle\Entity;
-
 use Doctrine\ORM\Mapping as ORM;
+
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * user
@@ -25,6 +25,12 @@ class user
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     * @Assert\Length(
+     *      min = "2",
+     *      max = "120",
+     *      minMessage = "Votre nom doit faire au moins {{ limit }} caractères",
+     *      maxMessage = "Votre nom ne peut pas être plus long que {{ limit }} caractères"
+     * )
      */
     private $name;
 
@@ -32,6 +38,7 @@ class user
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=255)
+     * @Assert\Email()
      */
     private $email;
 
@@ -39,6 +46,12 @@ class user
      * @var string
      *
      * @ORM\Column(name="login", type="string", length=255)
+     * @Assert\Length(
+     *      min = "2",
+     *      max = "12",
+     *      minMessage = "Votre login doit faire au moins {{ limit }} caractères",
+     *      maxMessage = "Votre login ne peut pas être plus long que {{ limit }} caractères"
+     * )
      */
     private $login;
 
@@ -46,6 +59,12 @@ class user
      * @var string
      *
      * @ORM\Column(name="password", type="string", length=255)
+     * @Assert\Length(
+     *      min = "8",
+     *      max = "12",
+     *      minMessage = "Votre mot de passe doit faire au moins {{ limit }} caractères",
+     *      maxMessage = "Votre mot de passe ne peut pas être plus long que {{ limit }} caractères"
+     * )
      */
     private $password;
 
@@ -53,6 +72,7 @@ class user
      * @var \DateTime
      *
      * @ORM\Column(name="birthDate", type="date")
+     * @Assert\Date()
      */
     private $birthDate;
 
@@ -60,6 +80,7 @@ class user
      * @var \DateTime
      *
      * @ORM\Column(name="creationDate", type="datetime")
+     * @Assert\DateTime()
      */
     private $creationDate;
 
@@ -67,6 +88,7 @@ class user
      * @var \DateTime
      *
      * @ORM\Column(name="lastEditTime", type="datetime")
+     * @Assert\DateTime()
      */
     private $lastEditTime;
 
@@ -74,6 +96,7 @@ class user
      * @var boolean
      *
      * @ORM\Column(name="enabled", type="boolean")
+     *  
      */
     private $enabled;
     

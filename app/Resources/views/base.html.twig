@@ -11,6 +11,41 @@
         padding-top: 60px;
         padding-bottom: 40px;
       }
+       /* Sticky footer styles
+      -------------------------------------------------- */
+
+      /* Wrapper for page content to push down footer */
+      #wrap {
+        min-height: 100%;
+        height: auto !important;
+        height: 100%;
+        /* Negative indent footer by it's height */
+        margin: 0 auto -60px;
+      }
+
+      /* Set the fixed height of the footer here */
+      #push,
+      #footer {
+        height: 60px;
+      }
+      #footer {
+        background-color: #080808;
+      }
+
+      /* Lastly, apply responsive CSS fixes as necessary */
+      @media (max-width: 767px) {
+        #footer {
+          margin-left: -20px;
+          margin-right: -20px;
+          padding-left: 20px;
+          padding-right: 20px;
+        }
+      }
+
+      .sidebar-nav {
+        padding: 10px 0;
+        margin-right: 20px;
+      }
     </style>
 
     </head>
@@ -18,9 +53,36 @@
         {% block menu %}
                 {% include ":blocs:menu.html.twig" %}  
         {% endblock %}
-        {% block body %}{% endblock %}
+        
+        <div class="row-fluid">
+            <div class="span3">
+            {% block sidebar %}
+                {% include ":blocs:sidebar.html.twig" %}  
+            {% endblock %}
+            
+             {% block infos %}
+                {% include ":blocs:infos.html.twig" %}  
+            {% endblock %}
+           
+            
+            
+            </div>
+            
+            
+            <div class="span9">
+            {% block body %}{% endblock %}
+            </div>
+        
+        </div>
+        
+        {% block footer %}
+                {% include ":blocs:footer.html.twig" %}  
+        {% endblock %}
+    
         {% block javascripts %}{% endblock %}
-                    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+   
+        
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="http://code.jquery.com/jquery.js"></script>
           <script scr="{{ asset('js/bootstrap.js') }}"></script>
     </body>
