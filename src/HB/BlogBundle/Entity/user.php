@@ -61,7 +61,7 @@ class user
      * @ORM\Column(name="password", type="string", length=255)
      * @Assert\Length(
      *      min = "8",
-     *      max = "12",
+     *      max = "20",
      *      minMessage = "Votre mot de passe doit faire au moins {{ limit }} caractères",
      *      maxMessage = "Votre mot de passe ne peut pas être plus long que {{ limit }} caractères"
      * )
