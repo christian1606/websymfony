@@ -1,6 +1,10 @@
-{% extends '::base.html.twig' %}
+{% extends 'HBBlogBundle::layout.html.twig' %}
 
-{% block body -%}
+
+{% block title %}{{ parent() }} - {{ entity.title }} {% endblock %}
+
+
+{% block content -%}
     <h1>Article</h1>
 
     <table class="record_properties">
@@ -10,11 +14,11 @@
                 <td>{{ entity.id }}</td>
             </tr>
             <tr>
-                <th>Titre</th>
+                <th>Title</th>
                 <td>{{ entity.title }}</td>
             </tr>
             <tr>
-                <th>Contenu</th>
+                <th>Content</th>
                 <td>{{ entity.content }}</td>
             </tr>
             <tr>
@@ -30,22 +34,20 @@
                 <td>{{ entity.publishDate|date('Y-m-d H:i:s') }}</td>
             </tr>
             <tr>
-                <th>Publié</th>
+                <th>Published</th>
                 <td>{{ entity.published }}</td>
             </tr>
             <tr>
-                <th>Actif</th>
+                <th>Enabled</th>
                 <td>{{ entity.enabled }}</td>
             </tr>
             <tr>
-                <th>Nom de l'auteur</th>
-                <td>{{ entity.author.login }}</td>
+                <th>Nom et login de l'auteur</th>
+                <td>{{ entity.author.nameLogin }}</td>
             </tr>
-       </tbody>
+        </tbody>
     </table>
 
-      
-      
         <ul class="record_actions">
     <li>
         <a href="{{ path('article') }}">
@@ -60,3 +62,5 @@
     <li>{{ form(delete_form) }}</li>
 </ul>
 {% endblock %}
+
+

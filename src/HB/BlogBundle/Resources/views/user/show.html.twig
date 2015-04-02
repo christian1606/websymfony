@@ -1,7 +1,7 @@
-{% extends '::base.html.twig' %}
+{% extends 'HBBlogBundle::layout.html.twig' %}
 
-{% block body -%}
-    <h1>user</h1>
+{% block content -%}
+    <h1>User</h1>
 
     <table class="record_properties">
         <tbody>
@@ -34,8 +34,8 @@
                 <td>{{ entity.creationDate|date('Y-m-d H:i:s') }}</td>
             </tr>
             <tr>
-                <th>Lastedittime</th>
-                <td>{{ entity.lastEditTime|date('Y-m-d H:i:s') }}</td>
+                <th>Lasteditdate</th>
+                <td>{{ entity.lastEditDate|date('Y-m-d H:i:s') }}</td>
             </tr>
             <tr>
                 <th>Enabled</th>
@@ -43,20 +43,18 @@
             </tr>
         </tbody>
     </table>
-
-    {% for article in entity.articles %}       
-         {% if loop.first %}  <ul> {% endif %}  
-             
-             <li>
-                Sujet d'article :  <a href="{{ path('article_show', {'id': article.id}) }}">  {{ article.title }} </a>
-             </li>
-             
-         {% if loop.last %}  </ul> {% endif %}    
-      {% endfor %}       
- 
-      
-      
-      <ul class="record_actions">
+            
+        {% for article in entity.articles %}
+            {% if loop.first %} <ul> {% endif %}
+                <li>
+                    <a href="{{ path('article_show', {'id': article.id}) }}">
+                        {{ article.title }}
+                    </a>
+                </li>
+            {% if loop.last %} </ul> {% endif %}
+        {% endfor %}
+        
+        <ul class="record_actions">
     <li>
         <a href="{{ path('user') }}">
             Back to the list

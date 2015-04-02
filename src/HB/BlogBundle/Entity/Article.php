@@ -1,5 +1,7 @@
 <?php
+
 namespace HB\BlogBundle\Entity;
+
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -24,12 +26,9 @@ class Article
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255)
-     * @Assert\Length(
-     *      min = "2",
-     *      max = "120",
-     *      minMessage = "Votre titre doit faire au moins {{ limit }} caractères",
-     *      maxMessage = "Votre titre ne peut pas être plus long que {{ limit }} caractères"
-     * )
+     * @Assert\Length(min=3, max=250, 
+     *          minMessage="Le titre doit faire au moins 3 caractères.",
+     *          maxMessage="Le titre doit faire moins de 250 caractères.")
      */
     private $title;
 
@@ -37,7 +36,8 @@ class Article
      * @var string
      *
      * @ORM\Column(name="content", type="text")
-     * @Assert\NotBlank()
+     * @Assert\Length(min=3, 
+     *          minMessage="Le contenu doit faire au moins 3 caractères.")
      */
     private $content;
 
@@ -69,7 +69,6 @@ class Article
      * @var boolean
      *
      * @ORM\Column(name="published", type="boolean")
-     * @Assert\DateTime()
      */
     private $published;
 
@@ -81,35 +80,29 @@ class Article
     private $enabled;
     
     /**
-     * @var user 
+     *
+     * @var User
      * 
-     * @ORM\ManyToOne(targetEntity="user", inversedBy="articles")
-     * @Assert\Valid()
-     * user chemin simple car ds le meme namespace
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="articles") 
      */
     private $author;
     
     /**
-     * @ORM\OneToOne(targetEntity="Image", cascade="persist")
+     *
+     * @var Image
      * 
-     * @var image 
+     * @ORM\OneToOne(targetEntity="Image", cascade="persist")
      */
     private $banner;
     
-    /**
-     * 
-     * 
-     * 
-     */
     public function __construct() {
-        //valeur par defaut ds le formulaire
+        //  valeur par défaut (notamment pour le formulaire)
         $this->creationDate = new \DateTime();
         $this->publishDate = new \DateTime();
         $this->enabled = true;
     }
-    
-    
-    /**
+
+        /**
      * Get id
      *
      * @return integer 
@@ -256,8 +249,6 @@ class Article
     {
         return $this->published;
     }
-    
-    
 
     /**
      * Set enabled
@@ -285,10 +276,10 @@ class Article
     /**
      * Set author
      *
-     * @param \HB\BlogBundle\Entity\user $author
+     * @param \HB\BlogBundle\Entity\User $author
      * @return Article
      */
-    public function setAuthor(\HB\BlogBundle\Entity\user $author = null)
+    public function setAuthor(\HB\BlogBundle\Entity\User $author = null)
     {
         $this->author = $author;
 
@@ -298,7 +289,7 @@ class Article
     /**
      * Get author
      *
-     * @return \HB\BlogBundle\Entity\user 
+     * @return \HB\BlogBundle\Entity\User 
      */
     public function getAuthor()
     {

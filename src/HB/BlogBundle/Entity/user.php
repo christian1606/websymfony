@@ -1,17 +1,17 @@
 <?php
-namespace HB\BlogBundle\Entity;
-use Doctrine\ORM\Mapping as ORM;
 
-use Symfony\Component\Validator\Constraints as Assert;
+namespace HB\BlogBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * user
+ * User
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="HB\BlogBundle\Entity\userRepository")
+ * @ORM\Entity(repositoryClass="HB\BlogBundle\Entity\UserRepository")
  */
-class user implements UserInterface
+class User implements UserInterface
 {
     /**
      * @var integer
@@ -26,12 +26,6 @@ class user implements UserInterface
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
-     * @Assert\Length(
-     *      min = "2",
-     *      max = "120",
-     *      minMessage = "Votre nom doit faire au moins {{ limit }} caractères",
-     *      maxMessage = "Votre nom ne peut pas être plus long que {{ limit }} caractères"
-     * )
      */
     private $name;
 
@@ -39,7 +33,6 @@ class user implements UserInterface
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=255)
-     * @Assert\Email()
      */
     private $email;
 
@@ -47,12 +40,6 @@ class user implements UserInterface
      * @var string
      *
      * @ORM\Column(name="login", type="string", length=255)
-     * @Assert\Length(
-     *      min = "2",
-     *      max = "12",
-     *      minMessage = "Votre login doit faire au moins {{ limit }} caractères",
-     *      maxMessage = "Votre login ne peut pas être plus long que {{ limit }} caractères"
-     * )
      */
     private $login;
 
@@ -60,12 +47,6 @@ class user implements UserInterface
      * @var string
      *
      * @ORM\Column(name="password", type="string", length=255)
-     * @Assert\Length(
-     *      min = "8",
-     *      max = "20",
-     *      minMessage = "Votre mot de passe doit faire au moins {{ limit }} caractères",
-     *      maxMessage = "Votre mot de passe ne peut pas être plus long que {{ limit }} caractères"
-     * )
      */
     private $password;
 
@@ -73,7 +54,6 @@ class user implements UserInterface
      * @var \DateTime
      *
      * @ORM\Column(name="birthDate", type="date")
-     * @Assert\Date()
      */
     private $birthDate;
 
@@ -81,46 +61,32 @@ class user implements UserInterface
      * @var \DateTime
      *
      * @ORM\Column(name="creationDate", type="datetime")
-     * @Assert\DateTime()
      */
     private $creationDate;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="lastEditTime", type="datetime")
-     * @Assert\DateTime()
+     * @ORM\Column(name="lastEditDate", type="datetime", nullable=true)
      */
-    private $lastEditTime;
+    private $lastEditDate;
 
     /**
      * @var boolean
      *
      * @ORM\Column(name="enabled", type="boolean")
-     *  
      */
     private $enabled;
     
-    
-     /**
+    /**
+     *
      * @var Article[]
      * 
-     * @ORM\OneToMany(targetEntity="Article", mappedBy="author")
-     * articles du user
+     * @ORM\OneToMany(targetEntity="Article", mappedBy="author") 
      */
     private $articles;
 
-     /**
-     * 
-     * 
-     * 
-     */
-    public function __construct() {
-        //valeur par defaut ds le formulaire
-        $this->creationDate = new \DateTime();
-        //$this->lastEditTime = new \DateTime();
-    }
-    
+
     /**
      * Get id
      *
@@ -135,7 +101,7 @@ class user implements UserInterface
      * Set name
      *
      * @param string $name
-     * @return user
+     * @return User
      */
     public function setName($name)
     {
@@ -158,7 +124,7 @@ class user implements UserInterface
      * Set email
      *
      * @param string $email
-     * @return user
+     * @return User
      */
     public function setEmail($email)
     {
@@ -181,7 +147,7 @@ class user implements UserInterface
      * Set login
      *
      * @param string $login
-     * @return user
+     * @return User
      */
     public function setLogin($login)
     {
@@ -199,12 +165,20 @@ class user implements UserInterface
     {
         return $this->login;
     }
-
+    
+    /**
+     * 
+     * @return string
+     */
+    public function getNameLogin() {
+        return $this->name . " - " . $this->login; 
+    }
+    
     /**
      * Set password
      *
      * @param string $password
-     * @return user
+     * @return User
      */
     public function setPassword($password)
     {
@@ -227,7 +201,7 @@ class user implements UserInterface
      * Set birthDate
      *
      * @param \DateTime $birthDate
-     * @return user
+     * @return User
      */
     public function setBirthDate($birthDate)
     {
@@ -250,7 +224,7 @@ class user implements UserInterface
      * Set creationDate
      *
      * @param \DateTime $creationDate
-     * @return user
+     * @return User
      */
     public function setCreationDate($creationDate)
     {
@@ -270,33 +244,33 @@ class user implements UserInterface
     }
 
     /**
-     * Set lastEditTime
+     * Set lastEditDate
      *
-     * @param \DateTime $lastEditTime
-     * @return user
+     * @param \DateTime $lastEditDate
+     * @return User
      */
-    public function setLastEditTime($lastEditTime)
+    public function setLastEditDate($lastEditDate)
     {
-        $this->lastEditTime = $lastEditTime;
+        $this->lastEditDate = $lastEditDate;
 
         return $this;
     }
 
     /**
-     * Get lastEditTime
+     * Get lastEditDate
      *
      * @return \DateTime 
      */
-    public function getLastEditTime()
+    public function getLastEditDate()
     {
-        return $this->lastEditTime;
+        return $this->lastEditDate;
     }
 
     /**
      * Set enabled
      *
      * @param boolean $enabled
-     * @return user
+     * @return User
      */
     public function setEnabled($enabled)
     {
@@ -314,17 +288,26 @@ class user implements UserInterface
     {
         return $this->enabled;
     }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->creationDate = new \DateTime();
+        $this->enabled = true;
+        $this->articles = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Add article
      *
      * @param \HB\BlogBundle\Entity\Article $article
-     * @return user
+     * @return User
      */
     public function addArticle(\HB\BlogBundle\Entity\Article $article)
     {
         $article->setAuthor($this);
-        $this->articles[] = $article;     
+        $this->articles[] = $article;
 
         return $this;
     }
@@ -359,7 +342,6 @@ class user implements UserInterface
     }
 
     public function getSalt() {
-        //surcharge de clé de cryptage
         return null;
     }
 

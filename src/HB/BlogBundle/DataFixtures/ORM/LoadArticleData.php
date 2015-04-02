@@ -8,43 +8,41 @@ use Doctrine\Common\Persistence\ObjectManager;
 use HB\BlogBundle\Entity\Article;
 
 /**
- * LoadArticleData est la classe de fixtures pour charger les articles en base
+ * LoadArticleData est la classe de fixtures pour charger des articles en base
  *
- * @author Christian
+ * @author humanbooster
  */
-class LoadArticleData extends AbstractFixture implements OrderedFixtureInterface {
+class LoadArticleData extends AbstractFixture implements OrderedFixtureInterface
+{
     /**
      * {@inheritDoc}
      */
     public function load(ObjectManager $manager)
     {
-        $user= $this->getReference("user1");
+        // on récupère norte utilisateur ajouté dans la fixture user
+        $user1 = $this->getReference("user1");
+        $user2 = $this->getReference("user2");
         
         $article = new Article();
-        $article->setTitle('Un article de test');
-        $article->setContent('Contenu article de test');
+        $article->setTitle("Un article de test");
+        $article->setContent("Ce magnifique article a été généré par les DoctrineFixtures");
         $article->setPublished(true);
-        $article->setAuthor($user);
-      
+        $article->setAuthor($user1);
+
         $manager->persist($article);
         
-         $article2 = new Article();
-        $article2->setTitle('Un autre article de test');
-        $article2->setContent('Contenu du nouvel article de test');
+        $article2 = new Article();
+        $article2->setTitle("Un 2nd article de test");
+        $article2->setContent("Ce deuxième magnifique article a été généré par les DoctrineFixtures");
         $article2->setPublished(true);
-         $article2->setAuthor($user);
-       
+        $article2->setAuthor($user2);
+        
         $manager->persist($article2);
-       
-      //on persiste en base
+        
+        // on pousse en base
         $manager->flush();
-      
     }
-/**
- * Permet de définir l'ordre de chargement des fixtures
- * 
- * @return int
- */
+
     public function getOrder() {
         return 2;
     }

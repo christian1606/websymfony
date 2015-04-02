@@ -1,7 +1,7 @@
-{% extends '::base.html.twig' %}
+{% extends 'HBBlogBundle::layout.html.twig' %}
 
-{% block body -%}
-    <h1>user list</h1>
+{% block content -%}
+    <h1>User list</h1>
 
     <table class="records_list">
         <thead>
@@ -13,7 +13,7 @@
                 <th>Password</th>
                 <th>Birthdate</th>
                 <th>Creationdate</th>
-                <th>Lastedittime</th>
+                <th>Lasteditdate</th>
                 <th>Enabled</th>
                 <th>Actions</th>
             </tr>
@@ -28,7 +28,7 @@
                 <td>{{ entity.password }}</td>
                 <td>{% if entity.birthDate %}{{ entity.birthDate|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{% if entity.creationDate %}{{ entity.creationDate|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if entity.lastEditTime %}{{ entity.lastEditTime|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if entity.lastEditDate %}{{ entity.lastEditDate|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{{ entity.enabled }}</td>
                 <td>
                 <ul>

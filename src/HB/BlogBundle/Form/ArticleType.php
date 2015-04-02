@@ -22,7 +22,10 @@ class ArticleType extends AbstractType
             ->add('publishDate', 'datetime')
             ->add('published', 'checkbox', array('required' => false))
             ->add('enabled', 'checkbox', array('required' => false))
-            ->add('author', 'entity', array('class'=>'HBBlogBundle:user', 'property'=>'name'))
+            ->add('author', 'entity', array('class' => 'HBBlogBundle:User',
+                                            'property' => 'nameLogin'))
+            ->add('banner', new ImageType())
+                //->add('author', new UserType())
         ;
     }
     

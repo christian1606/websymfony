@@ -7,19 +7,19 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use HB\BlogBundle\Entity\user;
-use HB\BlogBundle\Form\userType;
+use HB\BlogBundle\Entity\User;
+use HB\BlogBundle\Form\UserType;
 
 /**
- * user controller.
+ * User controller.
  *
  * @Route("/user")
  */
-class userController extends Controller
+class UserController extends Controller
 {
 
     /**
-     * Lists all user entities.
+     * Lists all User entities.
      *
      * @Route("/", name="user")
      * @Method("GET")
@@ -29,22 +29,22 @@ class userController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('HBBlogBundle:user')->findAll();
+        $entities = $em->getRepository('HBBlogBundle:User')->findAll();
 
         return array(
             'entities' => $entities,
         );
     }
     /**
-     * Creates a new user entity.
+     * Creates a new User entity.
      *
      * @Route("/", name="user_create")
      * @Method("POST")
-     * @Template("HBBlogBundle:user:new.html.twig")
+     * @Template("HBBlogBundle:User:new.html.twig")
      */
     public function createAction(Request $request)
     {
-        $entity = new user();
+        $entity = new User();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
@@ -63,15 +63,15 @@ class userController extends Controller
     }
 
     /**
-     * Creates a form to create a user entity.
+     * Creates a form to create a User entity.
      *
-     * @param user $entity The entity
+     * @param User $entity The entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(user $entity)
+    private function createCreateForm(User $entity)
     {
-        $form = $this->createForm(new userType(), $entity, array(
+        $form = $this->createForm(new UserType(), $entity, array(
             'action' => $this->generateUrl('user_create'),
             'method' => 'POST',
         ));
@@ -82,7 +82,7 @@ class userController extends Controller
     }
 
     /**
-     * Displays a form to create a new user entity.
+     * Displays a form to create a new User entity.
      *
      * @Route("/new", name="user_new")
      * @Method("GET")
@@ -90,7 +90,7 @@ class userController extends Controller
      */
     public function newAction()
     {
-        $entity = new user();
+        $entity = new User();
         $form   = $this->createCreateForm($entity);
 
         return array(
@@ -100,7 +100,7 @@ class userController extends Controller
     }
 
     /**
-     * Finds and displays a user entity.
+     * Finds and displays a User entity.
      *
      * @Route("/{id}", name="user_show")
      * @Method("GET")
@@ -110,10 +110,10 @@ class userController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('HBBlogBundle:user')->find($id);
+        $entity = $em->getRepository('HBBlogBundle:User')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find user entity.');
+            throw $this->createNotFoundException('Unable to find User entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -125,7 +125,7 @@ class userController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing user entity.
+     * Displays a form to edit an existing User entity.
      *
      * @Route("/{id}/edit", name="user_edit")
      * @Method("GET")
@@ -135,10 +135,10 @@ class userController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('HBBlogBundle:user')->find($id);
+        $entity = $em->getRepository('HBBlogBundle:User')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find user entity.');
+            throw $this->createNotFoundException('Unable to find User entity.');
         }
 
         $editForm = $this->createEditForm($entity);
@@ -152,15 +152,15 @@ class userController extends Controller
     }
 
     /**
-    * Creates a form to edit a user entity.
+    * Creates a form to edit a User entity.
     *
-    * @param user $entity The entity
+    * @param User $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createEditForm(user $entity)
+    private function createEditForm(User $entity)
     {
-        $form = $this->createForm(new userType(), $entity, array(
+        $form = $this->createForm(new UserType(), $entity, array(
             'action' => $this->generateUrl('user_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
@@ -170,24 +170,21 @@ class userController extends Controller
         return $form;
     }
     /**
-     * Edits an existing user entity.
+     * Edits an existing User entity.
      *
      * @Route("/{id}", name="user_update")
      * @Method("PUT")
-     * @Template("HBBlogBundle:user:edit.html.twig")
+     * @Template("HBBlogBundle:User:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('HBBlogBundle:user')->find($id);
+        $entity = $em->getRepository('HBBlogBundle:User')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find user entity.');
+            throw $this->createNotFoundException('Unable to find User entity.');
         }
-        
-        //gérer la datetime de dernire edition = lastEditDate
-        $entity->setLastEditDate(new \DateTime());
 
         $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createEditForm($entity);
@@ -206,7 +203,7 @@ class userController extends Controller
         );
     }
     /**
-     * Deletes a user entity.
+     * Deletes a User entity.
      *
      * @Route("/{id}", name="user_delete")
      * @Method("DELETE")
@@ -218,10 +215,10 @@ class userController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('HBBlogBundle:user')->find($id);
+            $entity = $em->getRepository('HBBlogBundle:User')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find user entity.');
+                throw $this->createNotFoundException('Unable to find User entity.');
             }
 
             $em->remove($entity);
@@ -232,7 +229,7 @@ class userController extends Controller
     }
 
     /**
-     * Creates a form to delete a user entity by id.
+     * Creates a form to delete a User entity by id.
      *
      * @param mixed $id The entity id
      *

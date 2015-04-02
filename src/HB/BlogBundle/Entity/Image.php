@@ -121,9 +121,4 @@ class Image
     {
         return $this->url;
     }
-    
-    
-    
-    
-    
 }
