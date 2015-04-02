@@ -3,6 +3,7 @@ namespace HB\BlogBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * user
@@ -10,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="HB\BlogBundle\Entity\userRepository")
  */
-class user
+class user implements UserInterface
 {
     /**
      * @var integer
@@ -348,4 +349,22 @@ class user
     {
         return $this->articles;
     }
+
+    public function eraseCredentials() {
+        
+    }
+
+    public function getRoles() {
+        return array('ROLE_USER');
+    }
+
+    public function getSalt() {
+        //surcharge de clé de cryptage
+        return null;
+    }
+
+    public function getUsername() {
+        return $this->login;
+    }
+
 }
