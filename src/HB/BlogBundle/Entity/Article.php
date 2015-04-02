@@ -90,6 +90,13 @@ class Article
     private $author;
     
     /**
+     * @ORM\OneToOne(targetEntity="Image", cascade="persist")
+     * 
+     * @var image 
+     */
+    private $banner;
+    
+    /**
      * 
      * 
      * 
@@ -296,5 +303,28 @@ class Article
     public function getAuthor()
     {
         return $this->author;
+    }
+
+    /**
+     * Set banner
+     *
+     * @param \HB\BlogBundle\Entity\Image $banner
+     * @return Article
+     */
+    public function setBanner(\HB\BlogBundle\Entity\Image $banner = null)
+    {
+        $this->banner = $banner;
+
+        return $this;
+    }
+
+    /**
+     * Get banner
+     *
+     * @return \HB\BlogBundle\Entity\Image 
+     */
+    public function getBanner()
+    {
+        return $this->banner;
     }
 }
