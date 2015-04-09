@@ -1,0 +1,43 @@
+{% extends 'HBBlogBundle::layout.html.twig' %}
+
+{% block content -%}
+
+    {% for article in articles  %}
+        <article class="article">
+
+            <h1>{{ article.title }}</h1> 
+            <p class="articleinfos">
+                Ajouté le {{ article.creationDate|date('d/m/Y') }} par <strong>{{ article.author.name }}</strong>
+            </p>
+            <p class="articleextrait">
+                {% if article.content|length>50 %}
+                   {{  article.content|slice(0,50)~'...' }}
+                   <a href="{{ path('article_show', { 'id': article.id }) }}">Lire la suite...</a>
+                {% else %}   
+                    {{ article.content }} 
+                {% endif %}
+            </p>
+
+            
+        </article>
+            
+            
+        <nav id="pagination">
+        {% if lienPagePrecedente is not null %}    
+            <a href="{{ lienPagePrecedente }}"><< Précédent</a>
+        {% endif %}     
+        {% if lienPagePrecedente is not null and lienPageSuivante is not null %}    
+            ----
+        {% endif %}     
+        
+        
+        {% if lienPageSuivante is not null %}
+            <a href="{{ lienPageSuivante }}">Suivant >></a>  
+        {% endif %}   
+        
+        {{ nombredepage }} Pages
+        </nav>    
+            
+    {% endfor  %}
+
+{% endblock %}
