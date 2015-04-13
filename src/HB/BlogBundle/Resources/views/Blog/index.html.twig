@@ -4,9 +4,9 @@
 {% block content -%}
     {% for article in pagination %}
         <article class="article">
-            <h1>{{ article.title }}</h1>
+            <h1 class="h1article">{{ article.title }}</h1>
             <p class="article_infos">
-                ajouté le {{ article.creationDate|date('d/m/Y') }} par {{ article.author.name }}
+                ajouté le {{ article.creationDate|date('d/m/Y') }} par {# article.author.name #}
             </p>
             <p class="article_extrait">
 
@@ -27,3 +27,5 @@
         {{ knp_pagination_render(pagination) }}
     </div>
 {% endblock %}
+ 
+

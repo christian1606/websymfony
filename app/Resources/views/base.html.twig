@@ -6,6 +6,7 @@
     {% block stylesheets %}{% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" />
+    <link href="{{ asset('js/jquery-ui-1.11.4/jquery-ui.css') }}" rel="stylesheet" />
     <style type="text/css">
         body {
             padding-top: 60px;
@@ -33,7 +34,10 @@
         {% block body %}{% endblock %}
     </div>
 {% block javascripts %}{% endblock %}
-<script src="http://code.jquery.com/jquery.js"></script>
+ <script src="{{ asset('js/jquery-ui-1.11.4/jquery-1.11.2.js') }}"></script>
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+ <script src="{{ asset('js/jquery-color.js') }}"></script>
+<script src="{{ asset('bundles/hbblog/js/homepage.js') }}"></script>
+
 </body>
 </html>
