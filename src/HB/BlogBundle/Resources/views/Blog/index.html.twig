@@ -1,29 +1,29 @@
+{# empty Twig template #}
 {% extends 'HBBlogBundle::layout.html.twig' %}
 
 {% block content -%}
+    {% for article in pagination %}
+        <article class="article">
+            <h1>{{ article.title }}</h1>
+            <p class="article_infos">
+                ajouté le {{ article.creationDate|date('d/m/Y') }} par {{ article.author.name }}
+            </p>
+            <p class="article_extrait">
 
-    {# total items count #}
-<div class="count">
-    {{ pagination.getTotalItemCount }}
-</div>
-<table>
-<tr>
-{# sorting of properties based on query components #}
-    <th>{{ knp_pagination_sortable(pagination, 'Id', 'a.id') }}</th>
-    <th{% if pagination.isSorted('a.Title') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Title', 'a.title') }}</th>
-</tr>
+                {% if article.content|length > article_max_length %}
+                    {{ article.content|slice(0, article_max_length)~'...' }}
+                    <a href ="">Lire la suite</a>
+                {% else %}
+                    {{ article.content }}
+                {% endif %}
+            </p>
+        </article>    
+    {% else %}
+        Pô d'article à afficher.
+    {% endfor %}   
 
-{# table body #}
-{% for article in pagination %}
-<tr {% if loop.index is odd %}class="color"{% endif %}>
-    <td>{{ article.id }}</td>
-    <td>{{ article.title }}</td>
-</tr>
-{% endfor %}
-</table>
-{# display navigation #}
-<div class="navigation">
-    {{ knp_pagination_render(pagination) }}
-</div>
-    
+    {# display navigation #}
+    <div class="navigation">
+        {{ knp_pagination_render(pagination) }}
+    </div>
 {% endblock %}
