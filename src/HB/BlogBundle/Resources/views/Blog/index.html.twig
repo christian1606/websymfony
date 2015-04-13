@@ -2,42 +2,28 @@
 
 {% block content -%}
 
-    {% for article in articles  %}
-        <article class="article">
+    {# total items count #}
+<div class="count">
+    {{ pagination.getTotalItemCount }}
+</div>
+<table>
+<tr>
+{# sorting of properties based on query components #}
+    <th>{{ knp_pagination_sortable(pagination, 'Id', 'a.id') }}</th>
+    <th{% if pagination.isSorted('a.Title') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Title', 'a.title') }}</th>
+</tr>
 
-            <h1>{{ article.title }}</h1> 
-            <p class="articleinfos">
-                Ajouté le {{ article.creationDate|date('d/m/Y') }} par <strong>{{ article.author.name }}</strong>
-            </p>
-            <p class="articleextrait">
-                {% if article.content|length>50 %}
-                   {{  article.content|slice(0,50)~'...' }}
-                   <a href="{{ path('article_show', { 'id': article.id }) }}">Lire la suite...</a>
-                {% else %}   
-                    {{ article.content }} 
-                {% endif %}
-            </p>
-
-            
-        </article>
-            
-            
-        <nav id="pagination">
-        {% if lienPagePrecedente is not null %}    
-            <a href="{{ lienPagePrecedente }}"><< Précédent</a>
-        {% endif %}     
-        {% if lienPagePrecedente is not null and lienPageSuivante is not null %}    
-            ----
-        {% endif %}     
-        
-        
-        {% if lienPageSuivante is not null %}
-            <a href="{{ lienPageSuivante }}">Suivant >></a>  
-        {% endif %}   
-        
-        {{ nombredepage }} Pages
-        </nav>    
-            
-    {% endfor  %}
-
+{# table body #}
+{% for article in pagination %}
+<tr {% if loop.index is odd %}class="color"{% endif %}>
+    <td>{{ article.id }}</td>
+    <td>{{ article.title }}</td>
+</tr>
+{% endfor %}
+</table>
+{# display navigation #}
+<div class="navigation">
+    {{ knp_pagination_render(pagination) }}
+</div>
+    
 {% endblock %}

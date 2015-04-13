@@ -12,22 +12,22 @@ use Doctrine\ORM\EntityRepository;
  */
 class ArticleRepository extends EntityRepository {
 
-    private $limitList = 1;
+    //private $limitList = 1;
 
     /**
      * renvoi les articles pour la page accueil
      */
-    public function getHomepageArticles($numPage = 0) {
+    public function getHomepageArticles() {
 
-        $offset = $numPage * $this->limitList;
+       // $offset = $numPage * $this->limitList;
         return $this->findBy(
-                        array('published' => true, 'enabled' => true), array('publishDate' => 'desc'), $this->limitList, $offset
+                        array('published' => true, 'enabled' => true), array('publishDate' => 'desc')//, $this->limitList, $offset
         );
     }
 
     /**
      * renvoi le nb de page 
-     */
+    
     public function getHomepageCountPage() {
 
         $nbArticles = $this->createQueryBuilder('a')
@@ -38,5 +38,5 @@ class ArticleRepository extends EntityRepository {
                 ->getSingleScalarResult();
         return (int) ceil($nbArticles/$this->limitList);
     }
-
+ */
 }
