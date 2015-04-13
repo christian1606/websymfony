@@ -25,6 +25,7 @@ class ArticleType extends AbstractType
             ->add('author', 'entity', array('class' => 'HBUserBundle:User',
                                             'property' => 'userName'))
             ->add('banner', new ImageType())
+            ->add('slug','text', array ("required"=>false))
                 //->add('author', new UserType())
         ;
     }
