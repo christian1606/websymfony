@@ -6,10 +6,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
+use HB\BlogBundle\Entity\Article;
+
 class BlogController extends Controller {
 
     /**
      * @Route("/", name="blog_index")
+     * @Route("/", name="home")
      * @Route("/page/{page}", name="blog_index_page")
      * @Template()
      */
@@ -19,7 +22,7 @@ class BlogController extends Controller {
         $repo = $em->getRepository('HBBlogBundle:Article');
         // on récupère le repository de Article et on lui demande 
 
-        $articles = $repo->getHomepageArticles(10);
+        $articles = $repo->getHomepageArticles();
 
         // on récupère le service paginator
         $paginator = $this->get('knp_paginator');
@@ -33,6 +36,17 @@ class BlogController extends Controller {
         
         return array(
             'pagination' => $pagination
+        );
+    }
+    
+    /**
+     * @Route("/blog/{slug}", name="blog_article_slug")
+     * @Template()
+     */
+    public function showAction(Article $article) {
+
+        return array(
+            'article' => $article
         );
     }
 

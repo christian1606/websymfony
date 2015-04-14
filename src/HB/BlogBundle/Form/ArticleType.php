@@ -23,10 +23,9 @@ class ArticleType extends AbstractType
             ->add('published', 'checkbox', array('required' => false))
             ->add('enabled', 'checkbox', array('required' => false))
             ->add('author', 'entity', array('class' => 'HBUserBundle:User',
-                                            'property' => 'userName'))
+                                            'property' => 'username'))
             ->add('banner', new ImageType())
-            ->add('slug','text', array ("required"=>false))
-                //->add('author', new UserType())
+            ->add('slug', 'text', array("required" => false))
         ;
     }
     
