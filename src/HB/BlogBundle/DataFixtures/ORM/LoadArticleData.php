@@ -32,8 +32,12 @@ class LoadArticleData extends AbstractFixture implements OrderedFixtureInterface
         for ($i = 0; $i< 100; $i++) {
 
             $article = new Article();
-            $article->setTitle("Un article de test" .$i);
-            $article->setContent("Ce magnifique article a été généré par les DoctrineFixtures");
+            $article->setTitle("Article de test" .$i);
+            $article->setContent("
+Bonjour,
+Voila le reste des portes de garage, une modif a été faite sur les portes de garage sectionnelle au niveau des numéros .
+Cordialement,
+");
             $article->setPublished(true);
             $article->setAuthor($user1);
             $article->setSlug($slugger->getSlug($i."-".$article->getTitle()));

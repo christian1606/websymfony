@@ -93,6 +93,7 @@ class Article
      * @var Image
      * 
      * @ORM\OneToOne(targetEntity="Image", cascade="persist")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $banner;
     

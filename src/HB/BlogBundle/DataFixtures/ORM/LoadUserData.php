@@ -29,8 +29,8 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         
         $user = $userManager->createUser();
 
-        $user->setUsername("bogosss93");
-        $user->setPlainPassword("123456");
+        $user->setUsername("toto");
+        $user->setPlainPassword("12345678");
         //$user->setName("Marcel Patulacci");
         //$user->setBirthDate(new \DateTime("05/25/1985"));
         $user->setEmail("peuimporte@domaine.com");
@@ -40,8 +40,8 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
 
         $user2 = $userManager->createUser();
 
-        $user2->setUsername("bqsdqs");
-        $user2->setPlainPassword("12s3456");
+        $user2->setUsername("titi");
+        $user2->setPlainPassword("12345678");
         //$user2->setName("Manu la tremblotte");
         //$user2->setBirthDate(new \DateTime("05/15/1985"));
         $user2->setEmail("importe@domaine.com");

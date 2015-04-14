@@ -32,29 +32,8 @@
 
 {% block javascripts %}
     {{ parent() }}
-    {# <script src="{{ asset("bundles/hbblog/js/homepage.js") }}"></script> #}
-    <script>
-        $(function() {
-
-
-
-            $("article.article").hover(
-                function(){
-                    $(this).animate({
-                            borderWidth: "10px",
-                            backgroundColor: "lightSalmon"
-                        }, 500);
-                },
-                function(){
-                    $(this).animate({
-                            borderWidth: "1px",
-                            backgroundColor: "lightGrey"
-                        }, 500);
-                }
-            );
-
-        });
-    </script>
+     <script src="{{ asset("bundles/hbblog/js/homepage.js") }}"></script> 
+   
 {% endblock %}
 
 {% block stylesheets %}

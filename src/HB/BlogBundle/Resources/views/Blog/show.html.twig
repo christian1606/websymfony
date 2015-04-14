@@ -1,8 +1,6 @@
 {% extends 'HBBlogBundle::layout.html.twig' %}
 
-
 {% block title %}{{ parent() }} - {{ article.title }} {% endblock %}
-
 
 {% block content -%}
     <h1>Article</h1>
@@ -40,6 +38,16 @@
             <tr>
                 <th>Enabled</th>
                 <td>{{ article.enabled }}</td>
+            </tr>
+             <tr>
+                <th>Image</th>
+                <td>
+                    {% if article.banner.url is defined %}
+                    <img scr="{{ article.banner.url }}" />
+                  {% else %}  
+                      Image inconnue !
+{% endif %}
+                </td>
             </tr>
             <tr>
                 <th>Nom et login de l'auteur</th>
